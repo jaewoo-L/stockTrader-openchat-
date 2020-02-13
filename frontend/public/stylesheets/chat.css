@@ -1,0 +1,83 @@
+.chatbox {
+  height:65vh;
+  max-width:1100px;
+  background-color: rgb(131, 163, 71);
+  overflow-y:scroll;
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.openchat {
+  margin:30px;
+  margin-top:85px;
+  overflow-x:hidden;
+}
+.me {
+  text-align:right;
+}
+li {
+  padding: 0 20px;
+  opacity:0;
+}
+li.visible {
+  opacity:1;
+}
+li b {
+  display: block;
+  padding:4px 4px;
+}
+li p {
+  max-width:50%;
+  position:relative;
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5%;
+  padding:10px 15px;
+}
+li.me p {
+  background-color:yellow;
+  border:1px solid yellow;
+}
+li p:after {
+  content:'';
+  position:absolute;
+  top: 10px;
+  left: -13px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+}
+li.me p:after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: -13px;
+  left: auto;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent transparent yellow;
+}
+form {
+  padding:20px;
+  background-color:#fff;
+  max-width:1100px;
+  position:relative;
+}
+form textarea {
+  width: 85%;
+  resize: none;
+  border: none;
+  outline:none;
+}
+form input[type="submit"] {
+  position:absolute;
+  right:5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@media screen and (max-width:768px) {
+  form textarea {
+    width:75%
+  }
+}
