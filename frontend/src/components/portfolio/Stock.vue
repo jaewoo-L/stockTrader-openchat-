@@ -6,7 +6,7 @@
       </div>
       <div class="panel-body">
         <div class="pull-left">
-          <input type="number" class="form-control" name="" value="" placeholder="Quantity" v-model.number="quantity">
+          <input type="number" class="form-control" name="" value="" v-model.number="quantity">
         </div>
         <div class="pull-right">
           <button
@@ -14,7 +14,7 @@
                 name="button"
                 class="btn btn-success"
                 @click="asellStock"
-                :disabled="quantity <= 0 || !Number.isInteger(quantity) || quantity > stock.quantity">Sell</button>
+                :disabled="quantity <= 0 || !isInteger(quantity) || quantity > stock.quantity">Sell</button>
         </div>
       </div>
     </div>
@@ -37,6 +37,9 @@
         };
         this.$store.dispatch('sellStock', order);
         this.quantity = 0;
+      },
+      isInteger(num) {
+        return (num ^ 0) === num;
       }
     }
   }

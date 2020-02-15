@@ -18,7 +18,7 @@ const mutations = {
       state.user = name;
       axios.post('/api/users/login', {username: name})
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
       })
       resolve()
     })

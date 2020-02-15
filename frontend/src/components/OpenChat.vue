@@ -1,5 +1,5 @@
 <template>
-  <div class="openchat">
+  <div class="openchat container">
     <h1>Open Chat</h1>
       <ul class="chatbox">
         <li v-for="message in messages">
@@ -20,13 +20,11 @@ export default {
     return {
       message:'',
       messages:[],
-      username: '',
-      state: 0
+      username: ''
     }
   },
   methods: {
     sendMessage() {
-      console.log('asdf');
       this.$store.dispatch('sendMessage', this.message)
       this.message = '';
     },
@@ -46,15 +44,14 @@ export default {
           }
           $(this).addClass('visible');
         })
-        box.stop().animate({scrollTop:box.prop('scrollHeight')+'px'},100);
-      },400);
+        box.scrollTop(box.prop('scrollHeight'));
+      },1000);
     });
       socket.on('message1', (message) => {
       this.messages.push(message);
       this.$nextTick(function(){
         this.$http.put('/api/chat/save', {name:'open',messages: this.messages})
         .then((response) => {
-          console.log('save chat');
         })
         var messageBox = document.querySelector('.chatbox');
         var box = $('.chatbox');
@@ -78,5 +75,4 @@ export default {
 }
 </script>
 <style src="../../public/stylesheets/chat.css" scoped>
-
 </style>
