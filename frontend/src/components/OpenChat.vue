@@ -35,19 +35,7 @@ export default {
   },
   mounted: function() {
     var nowuser = this.$store.getters.user;
-    $(function(){
-      var box = $('.chatbox');
-      setTimeout(function(){
-        box.find('li').each(function(idx) {
-          if($(this).find('b').text() == nowuser) {
-            $(this).addClass('me');
-          }
-          $(this).addClass('visible');
-        })
-        box.scrollTop(box.prop('scrollHeight'));
-      },1000);
-    });
-      socket.on('message1', (message) => {
+    socket.on('message1', (message) => {
       this.messages.push(message);
       this.$nextTick(function(){
         this.$http.put('/api/chat/save', {name:'open',messages: this.messages})
@@ -70,6 +58,18 @@ export default {
     this.$http.get('/api/chat/load')
     .then((response) => {
       this.messages = response.data.messages;
+      this.$nextTick(function(){
+        var nowuser = this.$store.getters.user;
+        var box = document.querySelector('.chatbox');
+        var chat = box.childNodes;
+        for(var i=0; i< chat.length; i++) {
+          if(chat[i].querySelector('b').innerText == nowuser) {
+              chat[i].classList.add('me');
+          }
+          chat[i].classList.add('visible');
+        }
+        box.scrollTop = box.scrollHeight;
+      })
     });
   }
 }
